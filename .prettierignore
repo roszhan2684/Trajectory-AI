@@ -1,0 +1,9 @@
+.cache
+node_modules
+.next
+pnpm-lock.yaml
+packages/engine/src/ml/models
+ml/data
+video
+apps/web/.data
+brag-output

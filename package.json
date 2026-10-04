@@ -1,0 +1,29 @@
+{
+  "name": "trajectory-ai",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.4.0",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @trajectory/web dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "pnpm --filter @trajectory/web test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "seed": "pnpm --filter @trajectory/web seed",
+    "seed:reset": "pnpm --filter @trajectory/web seed:reset",
+    "eval": "pnpm --filter @trajectory/web eval",
+    "ml:train": "python3 ml/train.py",
+    "mcp": "pnpm --filter @trajectory/mcp start"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.0",
+    "turbo": "^2.11.7",
+    "typescript": "6.0.3"
+  }
+}

@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true
+
+# Keep pnpm's content-addressable store inside the project folder.
+storeDir: .cache/pnpm-store

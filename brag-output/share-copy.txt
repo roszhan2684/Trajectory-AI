@@ -1,0 +1,2 @@
+Introducing Trajectory: recruiting software that shows its work — every match cites its evidence, explains why it isn't 100, and re-ranks from one sentence of feedback that you review first.
+Built with Next.js, a TypeScript ranking engine and ML models trained from scratch. No AI APIs.

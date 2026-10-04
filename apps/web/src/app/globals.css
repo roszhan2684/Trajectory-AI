@@ -1,0 +1,184 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------- design tokens */
+:root {
+  --bg: #f7f7f5;
+  --panel: #ffffff;
+  --panel-2: #fbfbfa;
+  --subtle: #f1f0ed;
+  --line: #e7e5e0;
+  --line-strong: #d6d3cc;
+  --ink: #111215;
+  --ink-2: #3a3d44;
+  --muted: #6c7079;
+  --faint: #9a9da4;
+  --accent: #5b5bd6;
+  --accent-ink: #ffffff;
+  --accent-soft: #eeeefc;
+  --good: #15803d;
+  --good-soft: #e8f5ec;
+  --warn: #b45309;
+  --warn-soft: #fdf3e3;
+  --bad: #c2410c;
+  --bad-soft: #fdeee6;
+  --info: #0e7490;
+  --info-soft: #e6f4f7;
+  --unknown: #64748b;
+  --unknown-soft: #eef1f5;
+  --ring: rgba(91, 91, 214, 0.35);
+  /* data-viz slots (validated: dataviz validate_palette, light surface #fff) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --seq-100: #cde2fb;
+  --seq-300: #6da7ec;
+  --seq-500: #256abf;
+  --seq-700: #0d366b;
+  --shadow: 0 1px 2px rgba(16, 17, 20, 0.04), 0 1px 1px rgba(16, 17, 20, 0.03);
+  --shadow-lg: 0 12px 40px -12px rgba(16, 17, 20, 0.18), 0 2px 6px rgba(16, 17, 20, 0.05);
+}
+
+.dark {
+  --bg: #0b0c0e;
+  --panel: #111316;
+  --panel-2: #14161a;
+  --subtle: #191c21;
+  --line: #23262d;
+  --line-strong: #30343c;
+  --ink: #eceef1;
+  --ink-2: #c4c8cf;
+  --muted: #8b9099;
+  --faint: #626771;
+  --accent: #8b8cf6;
+  --accent-ink: #0b0c0e;
+  --accent-soft: #1d1d3a;
+  --good: #4ade80;
+  --good-soft: #10261a;
+  --warn: #fbbf24;
+  --warn-soft: #2a2110;
+  --bad: #fb923c;
+  --bad-soft: #2c1810;
+  --info: #22d3ee;
+  --info-soft: #0c2529;
+  --unknown: #94a3b8;
+  --unknown-soft: #1a1f27;
+  --ring: rgba(139, 140, 246, 0.45);
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --seq-100: #104281;
+  --seq-300: #1c5cab;
+  --seq-500: #3987e5;
+  --seq-700: #9ec5f4;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 48px -12px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-good: var(--good);
+  --color-good-soft: var(--good-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-bad: var(--bad);
+  --color-bad-soft: var(--bad-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-unknown: var(--unknown);
+  --color-unknown-soft: var(--unknown-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --shadow-panel: var(--shadow);
+  --shadow-float: var(--shadow-lg);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* subtle scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* evidence highlight inside source excerpts */
+mark.evidence {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 1px;
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+.grid-bg {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--line) 70%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--line) 70%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -400px 0;
+  }
+  to {
+    background-position: 400px 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--subtle) 0%, var(--line) 50%, var(--subtle) 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,1261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Trajectory — launch film</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/audio-data.js"></script>
+    <style>
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/fonts/Geist-Variable.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: "Geist Mono";
+        src: url("assets/fonts/GeistMono-Variable.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("assets/fonts/InstrumentSerif-normal.woff2") format("woff2");
+        font-style: normal;
+      }
+      @font-face {
+        font-family: "Instrument Serif";
+        src: url("assets/fonts/InstrumentSerif-italic.woff2") format("woff2");
+        font-style: italic;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #08090b;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        color: #fff;
+        font-family: "Geist", system-ui, sans-serif;
+        background: #08090b;
+      }
+
+      /* ---------- persistent background layer */
+      .bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+        background-size: 64px 64px;
+        -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 72%);
+        mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 72%);
+      }
+      .bg-glow {
+        position: absolute;
+        left: 460px;
+        top: 120px;
+        width: 1000px;
+        height: 760px;
+        border-radius: 50%;
+        background: radial-gradient(
+          closest-side,
+          rgba(139, 140, 246, 0.3),
+          rgba(139, 140, 246, 0.06) 60%,
+          transparent 100%
+        );
+      }
+      .bg-arcs {
+        position: absolute;
+        inset: 0;
+      }
+
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+      .inner {
+        position: absolute;
+        inset: 0;
+      }
+      .eyebrow {
+        position: absolute;
+        left: 160px;
+        top: 110px;
+        font-size: 22px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #a5a6f8;
+        font-weight: 500;
+      }
+      .eyebrow b {
+        color: rgba(255, 255, 255, 0.62);
+        font-weight: 500;
+        margin-right: 14px;
+      }
+      .card {
+        position: absolute;
+        background: rgba(15, 16, 19, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 22px;
+        box-shadow: 0 40px 120px -30px rgba(91, 91, 214, 0.45);
+      }
+      .muted {
+        color: rgba(255, 255, 255, 0.55);
+      }
+      .char {
+        opacity: 0;
+      }
+
+      /* ---------- scene 1 */
+      #s1 .label {
+        position: absolute;
+        top: 262px;
+        width: 100%;
+        text-align: center;
+        font-family: "Geist Mono", monospace;
+        font-size: 24px;
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.62);
+        text-transform: uppercase;
+      }
+      #s1 .big {
+        position: absolute;
+        top: 330px;
+        width: 100%;
+        text-align: center;
+        font-size: 300px;
+        font-weight: 600;
+        letter-spacing: -0.04em;
+        color: #ececf2;
+        line-height: 1.05;
+      }
+      #s1 .q {
+        position: absolute;
+        top: 700px;
+        width: 100%;
+        text-align: center;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: 78px;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      /* ---------- scene 2 */
+      #s2 .card {
+        left: 160px;
+        top: 190px;
+        width: 1600px;
+        height: 690px;
+        padding: 44px 52px;
+      }
+      #s2 .card-h {
+        font-size: 22px;
+        color: rgba(255, 255, 255, 0.62);
+        display: flex;
+        justify-content: space-between;
+      }
+      #s2 .brief {
+        margin-top: 22px;
+        min-height: 150px;
+        padding: 26px 30px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 16px;
+        font-size: 34px;
+        line-height: 1.45;
+        color: rgba(255, 255, 255, 0.92);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      #s2 .parsed {
+        margin-top: 26px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 22px;
+        color: rgba(255, 255, 255, 0.55);
+      }
+      #s2 .pill {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(74, 222, 128, 0.12);
+        color: #86efac;
+        font-size: 20px;
+      }
+      #s2 .cols {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+      #s2 .col {
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 20px 22px;
+        min-height: 270px;
+        background: rgba(255, 255, 255, 0.015);
+      }
+      #s2 .col h3 {
+        font-size: 22px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+      #s2 .col h3 span {
+        color: rgba(255, 255, 255, 0.62);
+        font-weight: 400;
+        font-size: 18px;
+        margin-left: 8px;
+      }
+      #s2 .chip {
+        display: block;
+        width: fit-content;
+        margin-bottom: 12px;
+        padding: 9px 16px;
+        border-radius: 10px;
+        font-size: 23px;
+        background: rgba(139, 140, 246, 0.14);
+        color: #d4d5fd;
+        border: 1px solid rgba(139, 140, 246, 0.28);
+      }
+      #s2 .chip.amber {
+        background: rgba(251, 191, 36, 0.12);
+        color: #fcd34d;
+        border-color: rgba(251, 191, 36, 0.3);
+      }
+
+      /* ---------- scene 3 */
+      #s3 .list {
+        left: 160px;
+        top: 200px;
+        width: 720px;
+        height: 700px;
+        padding: 34px 36px;
+      }
+      #s3 .list h4 {
+        font-size: 22px;
+        color: rgba(255, 255, 255, 0.62);
+        font-weight: 500;
+        margin-bottom: 18px;
+      }
+      #s3 .row {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 22px 20px;
+        border-radius: 16px;
+        margin-bottom: 10px;
+      }
+      #s3 .row.sel {
+        background: rgba(139, 140, 246, 0.12);
+        border: 1px solid rgba(139, 140, 246, 0.35);
+      }
+      #s3 .rk {
+        font-size: 26px;
+        color: rgba(255, 255, 255, 0.62);
+        width: 44px;
+        font-weight: 600;
+      }
+      #s3 .nm {
+        font-size: 30px;
+        font-weight: 600;
+      }
+      #s3 .tt {
+        font-size: 21px;
+        color: rgba(255, 255, 255, 0.62);
+        margin-top: 4px;
+      }
+      #s3 .sig {
+        font-size: 20px;
+        color: #86efac;
+        margin-top: 8px;
+      }
+      #s3 .sc {
+        margin-left: auto;
+        font-size: 38px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      #s3 .detail {
+        left: 930px;
+        top: 200px;
+        width: 830px;
+        height: 700px;
+        padding: 36px 42px;
+      }
+      #s3 .dh {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+      #s3 .dh .name {
+        font-size: 36px;
+        font-weight: 600;
+      }
+      #s3 .dh .sub {
+        font-size: 21px;
+        color: rgba(255, 255, 255, 0.62);
+        margin-top: 4px;
+      }
+      #s3 .excerpt {
+        margin-top: 28px;
+        padding: 22px 24px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        font-family: "Geist Mono", monospace;
+        font-size: 22px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.62);
+      }
+      #s3 .hlwrap {
+        position: relative;
+        color: #fff;
+        white-space: nowrap;
+        display: inline-block;
+      }
+      #s3 .hl {
+        position: absolute;
+        left: -4px;
+        right: -4px;
+        top: 0;
+        bottom: 0;
+        border-radius: 6px;
+        background: rgba(139, 140, 246, 0.28);
+        box-shadow: 0 0 0 1px rgba(139, 140, 246, 0.5);
+        transform-origin: left center;
+      }
+      #s3 .hltext {
+        position: relative;
+      }
+      #s3 .supported {
+        margin-top: 16px;
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 10px;
+        background: rgba(74, 222, 128, 0.12);
+        color: #86efac;
+        font-size: 22px;
+      }
+      #s3 .why {
+        margin-top: 30px;
+      }
+      #s3 .why h5 {
+        font-size: 26px;
+        font-weight: 600;
+        margin-bottom: 18px;
+      }
+      #s3 .bar {
+        display: grid;
+        grid-template-columns: 300px 1fr 80px;
+        align-items: center;
+        gap: 18px;
+        margin-bottom: 16px;
+        font-size: 22px;
+      }
+      #s3 .track {
+        height: 12px;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+      #s3 .fill {
+        height: 100%;
+        border-radius: 6px;
+        transform-origin: left center;
+      }
+      #s3 .pts {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      #s3 .note {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.62);
+        margin-top: 6px;
+      }
+
+      /* ---------- scene 4 */
+      #s4 .rank {
+        left: 420px;
+        top: 170px;
+        width: 1080px;
+        height: 800px;
+        overflow: hidden;
+      }
+      #s4 .rh {
+        padding: 28px 36px 18px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      #s4 .rh .t {
+        font-size: 28px;
+        font-weight: 600;
+      }
+      #s4 .rh .s {
+        font-size: 20px;
+        color: rgba(255, 255, 255, 0.62);
+        margin-top: 4px;
+      }
+      #s4 .input {
+        margin: 22px 36px 0;
+        padding: 18px 22px;
+        border-radius: 14px;
+        border: 1px solid rgba(139, 140, 246, 0.5);
+        background: rgba(139, 140, 246, 0.08);
+        font-size: 26px;
+        line-height: 1.4;
+        min-height: 96px;
+      }
+      #s4 .deltas {
+        margin: 16px 36px 0;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-height: 46px;
+      }
+      #s4 .delta {
+        font-family: "Geist Mono", monospace;
+        font-size: 20px;
+        padding: 8px 13px;
+        border-radius: 8px;
+        white-space: nowrap;
+      }
+      #s4 .pos {
+        background: rgba(74, 222, 128, 0.12);
+        color: #86efac;
+      }
+      #s4 .neg {
+        background: rgba(251, 146, 60, 0.12);
+        color: #fdba74;
+      }
+      #s4 .apply {
+        margin-left: auto;
+        white-space: nowrap;
+        padding: 10px 20px;
+        border-radius: 10px;
+        background: #fff;
+        color: #08090b;
+        font-size: 21px;
+        font-weight: 600;
+      }
+      #s4 .rows {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        top: 330px;
+        height: 440px;
+      }
+      #s4 .rrow {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        padding: 0 18px;
+        border-radius: 14px;
+      }
+      #s4 .rrow .rk {
+        width: 64px;
+        font-size: 26px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.62);
+        font-variant-numeric: tabular-nums;
+      }
+      #s4 .rrow .nm {
+        font-size: 29px;
+        font-weight: 600;
+      }
+      #s4 .rrow .tg {
+        font-size: 19px;
+        margin-top: 3px;
+      }
+      #s4 .rrow .mv {
+        margin-left: auto;
+        width: 70px;
+        text-align: right;
+        font-size: 22px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      #s4 .rrow .sc {
+        width: 110px;
+        text-align: right;
+        font-size: 34px;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+      #s4 .cursor {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 34px;
+        height: 34px;
+      }
+
+      /* ---------- scene 5 */
+      #s5 .center {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 330px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #s5 .wm {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+      }
+      #s5 .wm .word {
+        font-size: 150px;
+        font-weight: 600;
+        letter-spacing: -0.045em;
+      }
+      #s5 .tag {
+        margin-top: 26px;
+        font-family: "Instrument Serif", serif;
+        font-style: italic;
+        font-size: 76px;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      #s5 .foot {
+        margin-top: 40px;
+        font-size: 26px;
+        letter-spacing: 0.08em;
+        color: rgba(255, 255, 255, 0.62);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-width="1920"
+      data-height="1080"
+      data-duration="24.6"
+    >
+      <!-- persistent background (audio-reactive glow) -->
+      <div class="bg-grid"></div>
+      <div id="glow" class="bg-glow"></div>
+      <svg id="arcs" class="bg-arcs" viewBox="0 0 1920 1080" aria-hidden="true">
+        <defs>
+          <linearGradient id="arcg" x1="0" x2="1">
+            <stop offset="0" stop-color="#8b8cf6" stop-opacity="0" />
+            <stop offset="1" stop-color="#8b8cf6" stop-opacity="0.55" />
+          </linearGradient>
+        </defs>
+        <path
+          class="arc"
+          d="M-60 980 C 520 940 1000 760 1640 260"
+          fill="none"
+          stroke="url(#arcg)"
+          stroke-width="2"
+          stroke-dasharray="2600"
+          stroke-dashoffset="2600"
+        />
+        <path
+          class="arc"
+          d="M-60 1040 C 600 1000 1100 820 1640 260"
+          fill="none"
+          stroke="url(#arcg)"
+          stroke-width="2"
+          stroke-dasharray="2600"
+          stroke-dashoffset="2600"
+        />
+        <path
+          class="arc"
+          d="M-60 900 C 440 880 900 700 1640 260"
+          fill="none"
+          stroke="url(#arcg)"
+          stroke-width="2"
+          stroke-dasharray="2600"
+          stroke-dashoffset="2600"
+        />
+        <circle id="arc-dot" cx="1640" cy="260" r="9" fill="#fff" opacity="0" />
+      </svg>
+
+      <!-- ================= Scene 1 — the number ================= -->
+      <section id="s1" class="clip" data-start="0" data-duration="4.9" data-track-index="1">
+        <div class="inner" id="s1i">
+          <div class="label" id="s1-label">Candidate match score</div>
+          <div class="big" id="s1-big">87%</div>
+          <div class="q" id="s1-q">…based on what?</div>
+        </div>
+      </section>
+
+      <!-- ================= Scene 2 — brief → structure ================= -->
+      <section id="s2" class="clip" data-start="4.6" data-duration="5.3" data-track-index="1">
+        <div class="inner" id="s2i">
+          <div class="eyebrow"><b>01</b>Role intake</div>
+          <div class="card" id="s2-card">
+            <div class="card-h">
+              <span>New role · describe it in plain language</span><span>Northstar Labs</span>
+            </div>
+            <div class="brief" id="s2-brief">
+              Founding full-stack engineer in SF. Strong TypeScript/React, has shipped LLM features, tiny
+              team, onsite. Bonus: search/ranking.
+            </div>
+            <div class="parsed" id="s2-parsed">
+              <span class="pill">Parsed in 4 ms · deterministic, no LLM</span
+              ><span>Review before anything goes live</span>
+            </div>
+            <div class="cols">
+              <div class="col">
+                <h3>Must have<span>×1.0</span></h3>
+                <span class="chip c2">TypeScript</span><span class="chip c2">React</span
+                ><span class="chip c2">Shipped LLM features</span>
+              </div>
+              <div class="col">
+                <h3>Strong signal<span>×0.6</span></h3>
+                <span class="chip c2">End-to-end ownership</span
+                ><span class="chip c2">Small, fast-moving team</span>
+              </div>
+              <div class="col">
+                <h3>Nice to have<span>×0.3</span></h3>
+                <span class="chip c2">Production search</span><span class="chip c2">Ranking</span>
+              </div>
+              <div class="col">
+                <h3>Needs clarification</h3>
+                <span class="chip amber c2">Compensation range?</span
+                ><span class="chip amber c2">Years of experience?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Scene 3 — evidence & why not 100 ================= -->
+      <section id="s3" class="clip" data-start="9.6" data-duration="5.7" data-track-index="1">
+        <div class="inner" id="s3i">
+          <div class="eyebrow"><b>02</b>Explainable ranking</div>
+          <div class="card list" id="s3-list">
+            <h4>Founding Full-Stack AI Engineer · 47 ranked</h4>
+            <div class="row sel s3row">
+              <span class="rk">#1</span>
+              <div>
+                <div class="nm">Ava Lindqvist</div>
+                <div class="tt">Founding Engineer · Tidepool AI</div>
+                <div class="sig">✓ TypeScript, React, Next.js — evidenced</div>
+              </div>
+              <span class="sc">90.4</span>
+            </div>
+            <div class="row s3row">
+              <span class="rk">#2</span>
+              <div>
+                <div class="nm">Noor Haddad</div>
+                <div class="tt">Founder &amp; Engineer · Lumenpath</div>
+                <div class="sig">✓ Shipped AI products independently</div>
+              </div>
+              <span class="sc">87.4</span>
+            </div>
+            <div class="row s3row">
+              <span class="rk">#3</span>
+              <div>
+                <div class="nm">Grace Jensen</div>
+                <div class="tt">Full-stack engineer</div>
+                <div class="sig">✓ 4 roles at pre-seed → Series A</div>
+              </div>
+              <span class="sc">84.1</span>
+            </div>
+          </div>
+          <div class="card detail" id="s3-detail">
+            <div class="dh">
+              <svg width="96" height="96" viewBox="0 0 96 96" aria-hidden="true">
+                <circle cx="48" cy="48" r="42" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="7" />
+                <circle
+                  id="ring"
+                  cx="48"
+                  cy="48"
+                  r="42"
+                  fill="none"
+                  stroke="#4ade80"
+                  stroke-width="7"
+                  stroke-linecap="round"
+                  stroke-dasharray="263.9"
+                  stroke-dashoffset="263.9"
+                  transform="rotate(-90 48 48)"
+                />
+                <text
+                  x="48"
+                  y="58"
+                  text-anchor="middle"
+                  fill="#fff"
+                  font-size="30"
+                  font-weight="600"
+                  font-family="Geist"
+                >
+                  90
+                </text>
+              </svg>
+              <div>
+                <div class="name">Ava Lindqvist</div>
+                <div class="sub">Why this match? Every claim cites a source.</div>
+              </div>
+            </div>
+            <div class="excerpt">
+              …from first commit to 2,400 paying teams<br />–
+              <span class="hlwrap"
+                ><span class="hl" id="hl"></span
+                ><span class="hltext">Shipped LLM features in production (RAG)</span></span
+              ><br />– Designed the Postgres schema and data layer…
+            </div>
+            <div class="supported" id="s3-sup">✓ LLM applications · supported by 2 sources</div>
+            <div class="why">
+              <h5>Why not 100?</h5>
+              <div class="bar s3bar">
+                <span>Production search</span>
+                <div class="track"><div class="fill" style="background: #94a3b8"></div></div>
+                <span class="pts">−1.5</span>
+              </div>
+              <div class="bar s3bar">
+                <span>Semantic relevance</span>
+                <div class="track"><div class="fill" style="background: #8b8cf6; width: 73%"></div></div>
+                <span class="pts">−1.1</span>
+              </div>
+              <div class="bar s3bar">
+                <span>Fit model</span>
+                <div class="track"><div class="fill" style="background: #8b8cf6; width: 53%"></div></div>
+                <span class="pts">−0.8</span>
+              </div>
+              <div class="note" id="s3-note">
+                Grey = missing evidence, not negative evidence — so it becomes a question.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Scene 4 — one sentence re-ranks ================= -->
+      <section id="s4" class="clip" data-start="15" data-duration="5.9" data-track-index="1">
+        <div class="inner" id="s4i">
+          <div class="eyebrow"><b>03</b>Feedback learning</div>
+          <div class="card rank" id="s4-card">
+            <div class="rh">
+              <div class="t">Founding Full-Stack AI Engineer</div>
+              <div class="s">Refine ranking in plain language — you review every change</div>
+            </div>
+            <div class="input" id="s4-input">
+              Too enterprise. Prioritize people who shipped independently in teams under 30.
+            </div>
+            <div class="deltas">
+              <span class="delta neg d4">enterprise −0.08</span>
+              <span class="delta pos d4">independent +0.18</span>
+              <span class="delta pos d4">small team +0.12</span>
+              <span class="apply" id="apply">Apply &amp; re-rank</span>
+            </div>
+            <div class="rows" id="rows"></div>
+          </div>
+          <svg class="cursor" id="cursor" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M3 2l7 19 2.6-7.4L20 11z"
+              fill="#fff"
+              stroke="#08090b"
+              stroke-width="1.4"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <!-- ================= Scene 5 — outro ================= -->
+      <section id="s5" class="clip" data-start="20.6" data-duration="4" data-track-index="1">
+        <div class="inner" id="s5i">
+          <div class="center">
+            <div class="wm" id="s5-wm">
+              <svg width="150" height="150" viewBox="0 0 32 32" aria-hidden="true">
+                <rect width="32" height="32" rx="8" fill="#fff" />
+                <path
+                  d="M7 23c5-1 9-5 11-10"
+                  stroke="#8b8cf6"
+                  stroke-width="2.6"
+                  fill="none"
+                  stroke-linecap="round"
+                />
+                <circle cx="21" cy="10" r="3.4" fill="#08090b" />
+              </svg>
+              <span class="word">Trajectory</span>
+            </div>
+            <div class="tag" id="s5-tag">Find the person who fits where you're going.</div>
+            <div class="foot" id="s5-foot">Evidence-backed · Human-approved · No AI APIs</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= audio ================= -->
+      <audio
+        id="music"
+        src="assets/music/happy-beats-business-moves-vol-10-by-ende-dot-app.mp3"
+        data-start="0"
+        data-duration="24.6"
+        data-track-index="10"
+        data-volume="1"
+        data-automation='{"version":1,"lanes":[{"target":"volume","points":[{"t":0,"v":0},{"t":0.8,"v":0.16},{"t":23.2,"v":0.16},{"t":23.5,"v":0.34},{"t":24.0,"v":0.3},{"t":24.6,"v":0}]}]}'
+      ></audio>
+      <audio
+        id="vo1"
+        src="assets/vo/vo1.wav"
+        data-start="0.3"
+        data-duration="4.04"
+        data-track-index="11"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="vo2"
+        src="assets/vo/vo2.wav"
+        data-start="4.9"
+        data-duration="4.31"
+        data-track-index="11"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="vo3"
+        src="assets/vo/vo3.wav"
+        data-start="9.9"
+        data-duration="4.31"
+        data-track-index="11"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="vo4"
+        src="assets/vo/vo4.wav"
+        data-start="15.3"
+        data-duration="4.25"
+        data-track-index="11"
+        data-volume="1"
+      ></audio>
+      <audio
+        id="vo5"
+        src="assets/vo/vo5.wav"
+        data-start="20.9"
+        data-duration="2.27"
+        data-track-index="11"
+        data-volume="1"
+      ></audio>
+      <!-- sfx (timestamps match the implemented motion below) -->
+      <audio
+        id="sfx-k1"
+        src="assets/sfx/keypress-001.wav"
+        data-start="1.75"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.22"
+      ></audio>
+      <audio
+        id="sfx-k2"
+        src="assets/sfx/keypress-003.wav"
+        data-start="2.05"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.2"
+      ></audio>
+      <audio
+        id="sfx-k3"
+        src="assets/sfx/keypress-002.wav"
+        data-start="2.35"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.2"
+      ></audio>
+      <audio
+        id="sfx-k4"
+        src="assets/sfx/keypress-004.wav"
+        data-start="5.15"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-k5"
+        src="assets/sfx/keypress-001.wav"
+        data-start="5.6"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-k6"
+        src="assets/sfx/keypress-003.wav"
+        data-start="6.05"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-chip1"
+        src="assets/sfx/rollover2.ogg"
+        data-start="7.05"
+        data-duration="0.2"
+        data-track-index="13"
+        data-volume="0.22"
+      ></audio>
+      <audio
+        id="sfx-chip2"
+        src="assets/sfx/rollover2.ogg"
+        data-start="7.6"
+        data-duration="0.2"
+        data-track-index="13"
+        data-volume="0.22"
+      ></audio>
+      <audio
+        id="sfx-chip3"
+        src="assets/sfx/rollover2.ogg"
+        data-start="8.15"
+        data-duration="0.2"
+        data-track-index="13"
+        data-volume="0.22"
+      ></audio>
+      <audio
+        id="sfx-bar1"
+        src="assets/sfx/click_005.ogg"
+        data-start="12.75"
+        data-duration="0.1"
+        data-track-index="13"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="sfx-bar2"
+        src="assets/sfx/click_005.ogg"
+        data-start="13.05"
+        data-duration="0.1"
+        data-track-index="13"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="sfx-bar3"
+        src="assets/sfx/click_005.ogg"
+        data-start="13.35"
+        data-duration="0.1"
+        data-track-index="13"
+        data-volume="0.3"
+      ></audio>
+      <audio
+        id="sfx-k7"
+        src="assets/sfx/keypress-002.wav"
+        data-start="15.5"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-k8"
+        src="assets/sfx/keypress-004.wav"
+        data-start="15.95"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-k9"
+        src="assets/sfx/keypress-001.wav"
+        data-start="16.4"
+        data-duration="0.2"
+        data-track-index="12"
+        data-volume="0.18"
+      ></audio>
+      <audio
+        id="sfx-click"
+        src="assets/sfx/click_003.ogg"
+        data-start="18.2"
+        data-duration="0.1"
+        data-track-index="13"
+        data-volume="0.6"
+      ></audio>
+      <audio
+        id="sfx-slide"
+        src="assets/sfx/card-slide-1.ogg"
+        data-start="18.45"
+        data-duration="0.6"
+        data-track-index="13"
+        data-volume="0.32"
+      ></audio>
+      <audio
+        id="sfx-logo"
+        src="assets/sfx/impactSoft_medium_004.ogg"
+        data-start="20.74"
+        data-duration="0.3"
+        data-track-index="13"
+        data-volume="0.55"
+      ></audio>
+    </div>
+
+    <script>
+      // ---------- deterministic setup (no clocks, no randomness)
+      function splitChars(el) {
+        var text = el.textContent;
+        el.textContent = "";
+        var spans = [];
+        for (var i = 0; i < text.length; i++) {
+          var s = document.createElement("span");
+          s.className = "char";
+          s.textContent = text[i];
+          el.appendChild(s);
+          spans.push(s);
+        }
+        return spans;
+      }
+      var qChars = splitChars(document.getElementById("s1-q"));
+      var briefChars = splitChars(document.getElementById("s2-brief"));
+      var fbChars = splitChars(document.getElementById("s4-input"));
+
+      // Scene 4 rows: real before/after ranking from the demo dataset (synthetic people).
+      var ROWS = [
+        {
+          name: "Ava Lindqvist",
+          tag: "Founding Engineer · Tidepool AI",
+          tone: "",
+          before: 0,
+          after: 1,
+          rb: 1,
+          ra: 2,
+          sb: 90.4,
+          sa: 84.2,
+          mv: "↓1",
+        },
+        {
+          name: "Noor Haddad",
+          tag: "shipped AI products independently",
+          tone: "#86efac",
+          before: 1,
+          after: 0,
+          rb: 2,
+          ra: 1,
+          sb: 87.4,
+          sa: 85.9,
+          mv: "↑1",
+        },
+        {
+          name: "Grace Jensen",
+          tag: "Full-stack engineer",
+          tone: "",
+          before: 2,
+          after: 3,
+          rb: 3,
+          ra: 4,
+          sb: 84.1,
+          sa: 81.7,
+          mv: "↓1",
+        },
+        {
+          name: "Sofia Mendes",
+          tag: "Full-Stack Engineer · Mosaic Labs",
+          tone: "",
+          before: 3,
+          after: 4,
+          rb: 4,
+          ra: 8,
+          sb: 84.1,
+          sa: 77.0,
+          mv: "↓4",
+        },
+        {
+          name: "Rafael Larsen",
+          tag: "solo-shipped side projects · seed teams",
+          tone: "#86efac",
+          before: 4,
+          after: 2,
+          rb: 7,
+          ra: 3,
+          sb: 80.8,
+          sa: 83.5,
+          mv: "↑4",
+        },
+      ];
+      var ROW_H = 88;
+      var rowsEl = document.getElementById("rows");
+      var rowEls = ROWS.map(function (r) {
+        var d = document.createElement("div");
+        d.className = "rrow";
+        d.style.top = r.before * ROW_H + "px";
+        d.innerHTML =
+          '<span class="rk">#' +
+          r.rb +
+          '</span><div><div class="nm">' +
+          r.name +
+          '</div><div class="tg" style="color:' +
+          (r.tone || "rgba(255,255,255,0.62)") +
+          '">' +
+          r.tag +
+          '</div></div><span class="mv" style="opacity:0;color:' +
+          (r.mv.indexOf("↑") === 0 ? "#86efac" : "#fdba74") +
+          '">' +
+          r.mv +
+          '</span><span class="sc">' +
+          r.sb.toFixed(1) +
+          "</span>";
+        rowsEl.appendChild(d);
+        return d;
+      });
+
+      var tl = gsap.timeline({ paused: true });
+      var E = "power3.out";
+
+      // ---------- background
+      tl.fromTo(
+        "#glow",
+        { scale: 0.9, opacity: 0 },
+        { scale: 1, opacity: 0.7, duration: 1.6, ease: "sine.out" },
+        0,
+      );
+      tl.to("#glow", { x: 140, y: -40, duration: 9, ease: "sine.inOut" }, 1.6);
+      tl.to("#glow", { x: -60, y: 30, duration: 9, ease: "sine.inOut" }, 10.6);
+      tl.to("#glow", { x: 0, y: 0, duration: 5, ease: "sine.inOut" }, 19.6);
+
+      // ---------- Scene 1 (0–4.6): the anonymous number
+      tl.fromTo("#s1-label", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.6, ease: E }, 0.25);
+      tl.fromTo(
+        "#s1-big",
+        { opacity: 0, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" },
+        0.35,
+      );
+      tl.to(qChars, { opacity: 1, duration: 0.01, stagger: 0.045 }, 1.7);
+      tl.to("#s1-big", { opacity: 0.22, scale: 0.97, duration: 0.8, ease: "power2.inOut" }, 3.0);
+      tl.to("#s1i", { opacity: 0, y: -20, duration: 0.5, ease: "power2.in" }, 4.4);
+
+      // ---------- Scene 2 (4.6–9.6): brief → structure
+      tl.fromTo("#s2i", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 4.6);
+      tl.fromTo("#s2-card", { y: 40, scale: 0.98 }, { y: 0, scale: 1, duration: 0.7, ease: E }, 4.6);
+      tl.to(briefChars, { opacity: 1, duration: 0.01, stagger: 0.0115 }, 5.1);
+      tl.fromTo("#s2-parsed", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 6.75);
+      // chips arrive one by one, then hold as a set (≥1.5s) — near beat grid 7.05/7.6/8.15
+      tl.fromTo(
+        "#s2 .c2",
+        { opacity: 0, y: 14, scale: 0.92 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.6)", stagger: 0.14 },
+        7.05,
+      );
+      tl.to("#s2i", { opacity: 0, x: -40, duration: 0.5, ease: "power2.in" }, 9.4);
+
+      // ---------- Scene 3 (9.6–15.0): evidence & why not 100
+      tl.fromTo("#s3i", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 9.6);
+      tl.fromTo("#s3-list", { x: -40 }, { x: 0, duration: 0.7, ease: E }, 9.6);
+      tl.fromTo(
+        ".s3row",
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.45, ease: E, stagger: 0.12 },
+        9.85,
+      );
+      tl.fromTo("#s3-detail", { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.7, ease: E }, 10.7);
+      tl.to(
+        "#ring",
+        { attr: { "stroke-dashoffset": 263.9 * (1 - 0.904) }, duration: 1.0, ease: "power2.out" },
+        10.9,
+      );
+      tl.fromTo("#hl", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.inOut" }, 11.3);
+      tl.fromTo("#s3-sup", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, 11.95);
+      tl.fromTo(".s3bar", { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 0.3 }, 12.6);
+      tl.fromTo(
+        ".s3bar .fill",
+        { scaleX: 0 },
+        { scaleX: 1, duration: 0.6, ease: "power2.out", stagger: 0.3 },
+        12.7,
+      );
+      tl.fromTo("#s3-note", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 13.7);
+      tl.to("#s3i", { opacity: 0, duration: 0.5, ease: "power2.in" }, 14.8);
+
+      // ---------- Scene 4 (15.0–20.6): one sentence re-ranks the role
+      tl.fromTo("#s4i", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "sine.out" }, 15.0);
+      tl.fromTo("#s4-card", { y: 40 }, { y: 0, duration: 0.7, ease: E }, 15.0);
+      tl.fromTo(
+        ".rrow",
+        { opacity: 0, x: -14 },
+        { opacity: 1, x: 0, duration: 0.4, ease: E, stagger: 0.07 },
+        15.2,
+      );
+      tl.to(fbChars, { opacity: 1, duration: 0.01, stagger: 0.017 }, 15.45);
+      tl.fromTo(
+        ".d4",
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)", stagger: 0.22 },
+        16.95,
+      );
+      tl.fromTo("#apply", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 17.5);
+      tl.fromTo(
+        "#cursor",
+        { x: 1560, y: 900, opacity: 0 },
+        { x: 1388, y: 452, opacity: 1, duration: 0.6, ease: "power2.inOut" },
+        17.55,
+      );
+      tl.to("#apply", { scale: 0.93, duration: 0.08, ease: "power1.in" }, 18.2);
+      tl.to("#apply", { scale: 1, duration: 0.18, ease: "power1.out" }, 18.28);
+      tl.to("#cursor", { opacity: 0, duration: 0.3 }, 18.6);
+      // beat-locked: 18.45s re-order (strong cue 18.55s)
+      rowEls.forEach(function (el, i) {
+        var r = ROWS[i];
+        tl.to(el, { y: (r.after - r.before) * ROW_H, duration: 0.85, ease: "back.out(1.2)" }, 18.45);
+        var sc = el.querySelector(".sc");
+        var rk = el.querySelector(".rk");
+        var proxy = { v: r.sb };
+        // seek-safe: score and rank label are derived from the tween's own progress
+        tl.to(
+          proxy,
+          {
+            v: r.sa,
+            duration: 0.85,
+            ease: "power2.out",
+            onUpdate: function () {
+              sc.textContent = proxy.v.toFixed(1);
+              rk.textContent = "#" + (this.progress() < 0.35 ? r.rb : r.ra);
+            },
+          },
+          18.45,
+        );
+        tl.fromTo(el.querySelector(".mv"), { opacity: 0 }, { opacity: 1, duration: 0.3 }, 19.1);
+      });
+      tl.fromTo(
+        rowEls[1],
+        { backgroundColor: "rgba(74,222,128,0)" },
+        { backgroundColor: "rgba(74,222,128,0.10)", duration: 0.5 },
+        19.0,
+      );
+      tl.to("#s4i", { opacity: 0, duration: 0.5, ease: "power2.in" }, 20.4);
+
+      // ---------- Scene 5 (20.6–24.6): outro
+      tl.to(
+        ".arc",
+        { attr: { "stroke-dashoffset": 0 }, duration: 1.6, ease: "power2.out", stagger: 0.18 },
+        20.5,
+      );
+      tl.to("#arc-dot", { opacity: 0.9, duration: 0.4 }, 21.6);
+      tl.fromTo(
+        "#s5-wm",
+        { opacity: 0, scale: 0.94 },
+        { opacity: 1, scale: 1, duration: 0.7, ease: E },
+        20.74,
+      ); // beat-locked: 20.74s strong cue
+      tl.fromTo("#s5-tag", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: E }, 21.45);
+      tl.fromTo("#s5-foot", { opacity: 0 }, { opacity: 1, duration: 0.6 }, 22.4);
+      tl.to(["#s5i", "#arcs", "#glow"], { opacity: 0, duration: 0.55, ease: "power1.in" }, 24.0);
+
+      // ---------- audio-reactive: the violet glow breathes subtly with the music's bass
+      for (var f = 0; f < AUDIO_DATA.totalFrames; f++) {
+        tl.call(
+          (function (b) {
+            return function () {
+              gsap.set(".bg-grid", { opacity: 0.75 + 0.25 * b[0] });
+            };
+          })(AUDIO_DATA.frames[f].b),
+          [],
+          f / AUDIO_DATA.fps,
+        );
+      }
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

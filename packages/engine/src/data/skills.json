@@ -1,0 +1,725 @@
+[
+  {
+    "key": "typescript",
+    "display": "TypeScript",
+    "category": "language",
+    "aliases": ["typescript", "ts"]
+  },
+  {
+    "key": "javascript",
+    "display": "JavaScript",
+    "category": "language",
+    "aliases": ["javascript", "js", "es6", "ecmascript"]
+  },
+  {
+    "key": "python",
+    "display": "Python",
+    "category": "language",
+    "aliases": ["python", "python3"]
+  },
+  {
+    "key": "go",
+    "display": "Go",
+    "category": "language",
+    "aliases": ["golang", "go lang"]
+  },
+  {
+    "key": "rust",
+    "display": "Rust",
+    "category": "language",
+    "aliases": ["rust"]
+  },
+  {
+    "key": "java",
+    "display": "Java",
+    "category": "language",
+    "aliases": ["java", "j2ee"]
+  },
+  {
+    "key": "kotlin",
+    "display": "Kotlin",
+    "category": "language",
+    "aliases": ["kotlin"]
+  },
+  {
+    "key": "swift",
+    "display": "Swift",
+    "category": "language",
+    "aliases": ["swift"]
+  },
+  {
+    "key": "csharp",
+    "display": "C#",
+    "category": "language",
+    "aliases": ["c#", "csharp", "dotnet", "asp.net"]
+  },
+  {
+    "key": "cpp",
+    "display": "C++",
+    "category": "language",
+    "aliases": ["c++", "cpp"]
+  },
+  {
+    "key": "ruby",
+    "display": "Ruby",
+    "category": "language",
+    "aliases": ["ruby"]
+  },
+  {
+    "key": "php",
+    "display": "PHP",
+    "category": "language",
+    "aliases": ["php", "laravel"]
+  },
+  {
+    "key": "scala",
+    "display": "Scala",
+    "category": "language",
+    "aliases": ["scala"]
+  },
+  {
+    "key": "sql",
+    "display": "SQL",
+    "category": "data",
+    "aliases": ["sql", "t-sql", "pl/sql", "plsql"]
+  },
+  {
+    "key": "react",
+    "display": "React",
+    "category": "frontend",
+    "aliases": ["react", "reactjs", "react.js"]
+  },
+  {
+    "key": "nextjs",
+    "display": "Next.js",
+    "category": "frontend",
+    "aliases": ["next.js", "nextjs", "next js"]
+  },
+  {
+    "key": "vue",
+    "display": "Vue",
+    "category": "frontend",
+    "aliases": ["vue", "vue.js", "vuejs", "nuxt"]
+  },
+  {
+    "key": "angular",
+    "display": "Angular",
+    "category": "frontend",
+    "aliases": ["angular", "angularjs"]
+  },
+  {
+    "key": "svelte",
+    "display": "Svelte",
+    "category": "frontend",
+    "aliases": ["svelte", "sveltekit"]
+  },
+  {
+    "key": "tailwind",
+    "display": "Tailwind CSS",
+    "category": "frontend",
+    "aliases": ["tailwind", "tailwindcss", "tailwind css"]
+  },
+  {
+    "key": "css",
+    "display": "CSS",
+    "category": "frontend",
+    "aliases": ["css", "css3", "sass", "scss"]
+  },
+  {
+    "key": "html",
+    "display": "HTML",
+    "category": "frontend",
+    "aliases": ["html", "html5"]
+  },
+  {
+    "key": "react_native",
+    "display": "React Native",
+    "category": "mobile",
+    "aliases": ["react native", "react-native"]
+  },
+  {
+    "key": "ios",
+    "display": "iOS",
+    "category": "mobile",
+    "aliases": ["ios", "swiftui", "uikit"]
+  },
+  {
+    "key": "android",
+    "display": "Android",
+    "category": "mobile",
+    "aliases": ["android", "jetpack compose"]
+  },
+  {
+    "key": "nodejs",
+    "display": "Node.js",
+    "category": "backend",
+    "aliases": ["node.js", "nodejs", "node", "express", "express.js", "nestjs", "fastify"]
+  },
+  {
+    "key": "graphql",
+    "display": "GraphQL",
+    "category": "backend",
+    "aliases": ["graphql", "apollo"]
+  },
+  {
+    "key": "rest_api",
+    "display": "REST APIs",
+    "category": "backend",
+    "aliases": ["restful", "rest api", "rest apis", "api design"]
+  },
+  {
+    "key": "trpc",
+    "display": "tRPC",
+    "category": "backend",
+    "aliases": ["trpc"]
+  },
+  {
+    "key": "django",
+    "display": "Django",
+    "category": "backend",
+    "aliases": ["django"]
+  },
+  {
+    "key": "fastapi",
+    "display": "FastAPI",
+    "category": "backend",
+    "aliases": ["fastapi", "flask"]
+  },
+  {
+    "key": "rails",
+    "display": "Ruby on Rails",
+    "category": "backend",
+    "aliases": ["rails", "ruby on rails"]
+  },
+  {
+    "key": "spring",
+    "display": "Spring",
+    "category": "backend",
+    "aliases": ["spring", "spring boot", "springboot"]
+  },
+  {
+    "key": "microservices",
+    "display": "Microservices",
+    "category": "backend",
+    "aliases": ["microservices", "microservice", "service oriented architecture", "soa"]
+  },
+  {
+    "key": "postgresql",
+    "display": "PostgreSQL",
+    "category": "data",
+    "aliases": ["postgresql", "postgres", "psql"]
+  },
+  {
+    "key": "mysql",
+    "display": "MySQL",
+    "category": "data",
+    "aliases": ["mysql", "mariadb"]
+  },
+  {
+    "key": "mongodb",
+    "display": "MongoDB",
+    "category": "data",
+    "aliases": ["mongodb", "mongo"]
+  },
+  {
+    "key": "redis",
+    "display": "Redis",
+    "category": "data",
+    "aliases": ["redis"]
+  },
+  {
+    "key": "prisma",
+    "display": "Prisma",
+    "category": "data",
+    "aliases": ["prisma"]
+  },
+  {
+    "key": "drizzle",
+    "display": "Drizzle ORM",
+    "category": "data",
+    "aliases": ["drizzle", "drizzle orm"]
+  },
+  {
+    "key": "supabase",
+    "display": "Supabase",
+    "category": "data",
+    "aliases": ["supabase"]
+  },
+  {
+    "key": "firebase",
+    "display": "Firebase",
+    "category": "data",
+    "aliases": ["firebase", "firestore"]
+  },
+  {
+    "key": "kafka",
+    "display": "Kafka",
+    "category": "data",
+    "aliases": ["kafka", "event streaming"]
+  },
+  {
+    "key": "spark",
+    "display": "Spark",
+    "category": "data",
+    "aliases": ["spark", "pyspark", "apache spark"]
+  },
+  {
+    "key": "airflow",
+    "display": "Airflow",
+    "category": "data",
+    "aliases": ["airflow", "dagster", "prefect"]
+  },
+  {
+    "key": "dbt",
+    "display": "dbt",
+    "category": "data",
+    "aliases": ["dbt"]
+  },
+  {
+    "key": "snowflake",
+    "display": "Snowflake",
+    "category": "data",
+    "aliases": ["snowflake", "bigquery", "redshift", "data warehouse"]
+  },
+  {
+    "key": "etl",
+    "display": "ETL / data pipelines",
+    "category": "data",
+    "aliases": ["etl", "data pipeline", "data pipelines", "elt"]
+  },
+  {
+    "key": "data_analysis",
+    "display": "Data analysis",
+    "category": "data",
+    "aliases": ["data analysis", "analytics", "data analytics", "tableau", "power bi", "looker"]
+  },
+  {
+    "key": "excel",
+    "display": "Excel",
+    "category": "business",
+    "aliases": ["excel", "microsoft excel", "spreadsheets", "vlookup"]
+  },
+  {
+    "key": "statistics",
+    "display": "Statistics",
+    "category": "data",
+    "aliases": ["statistics", "statistical analysis", "a/b testing", "ab testing", "experimentation"]
+  },
+  {
+    "key": "machine_learning",
+    "display": "Machine learning",
+    "category": "ai",
+    "aliases": ["machine learning", "ml", "scikit-learn", "sklearn", "xgboost"]
+  },
+  {
+    "key": "deep_learning",
+    "display": "Deep learning",
+    "category": "ai",
+    "aliases": ["deep learning", "neural networks", "pytorch", "tensorflow", "keras"]
+  },
+  {
+    "key": "llm",
+    "display": "LLM applications",
+    "category": "ai",
+    "aliases": [
+      "llm",
+      "llms",
+      "large language models",
+      "gpt",
+      "openai",
+      "anthropic",
+      "claude",
+      "prompt engineering",
+      "generative ai",
+      "genai"
+    ]
+  },
+  {
+    "key": "rag",
+    "display": "RAG / retrieval",
+    "category": "ai",
+    "aliases": [
+      "rag",
+      "retrieval augmented generation",
+      "retrieval-augmented generation",
+      "embeddings",
+      "vector database",
+      "pgvector",
+      "pinecone"
+    ]
+  },
+  {
+    "key": "ai_sdk",
+    "display": "Vercel AI SDK",
+    "category": "ai",
+    "aliases": ["ai sdk", "vercel ai sdk"]
+  },
+  {
+    "key": "langchain",
+    "display": "LangChain",
+    "category": "ai",
+    "aliases": ["langchain", "llamaindex"]
+  },
+  {
+    "key": "llm_evals",
+    "display": "LLM evaluation",
+    "category": "ai",
+    "aliases": ["evals", "llm evals", "langfuse", "langsmith", "model evaluation"]
+  },
+  {
+    "key": "nlp",
+    "display": "NLP",
+    "category": "ai",
+    "aliases": ["nlp", "natural language processing", "spacy", "transformers"]
+  },
+  {
+    "key": "computer_vision",
+    "display": "Computer vision",
+    "category": "ai",
+    "aliases": ["computer vision", "opencv", "image recognition"]
+  },
+  {
+    "key": "mcp",
+    "display": "Model Context Protocol",
+    "category": "ai",
+    "aliases": ["mcp", "model context protocol"]
+  },
+  {
+    "key": "agents",
+    "display": "AI agents",
+    "category": "ai",
+    "aliases": ["ai agents", "agentic", "agent workflows", "tool calling", "function calling"]
+  },
+  {
+    "key": "search",
+    "display": "Search systems",
+    "category": "search",
+    "aliases": [
+      "search",
+      "search engine",
+      "search ranking",
+      "search systems",
+      "search infrastructure",
+      "information retrieval"
+    ]
+  },
+  {
+    "key": "typesense",
+    "display": "Typesense",
+    "category": "search",
+    "aliases": ["typesense"]
+  },
+  {
+    "key": "elasticsearch",
+    "display": "Elasticsearch",
+    "category": "search",
+    "aliases": ["elasticsearch", "elastic search", "opensearch", "solr", "lucene", "algolia", "meilisearch"]
+  },
+  {
+    "key": "ranking",
+    "display": "Ranking / recommender systems",
+    "category": "search",
+    "aliases": ["ranking", "recommender", "recommendation systems", "learning to rank", "relevance"]
+  },
+  {
+    "key": "trigger_dev",
+    "display": "Trigger.dev",
+    "category": "workflow",
+    "aliases": ["trigger.dev", "triggerdev"]
+  },
+  {
+    "key": "temporal",
+    "display": "Temporal",
+    "category": "workflow",
+    "aliases": ["temporal", "temporal.io"]
+  },
+  {
+    "key": "durable_workflows",
+    "display": "Durable workflows / queues",
+    "category": "workflow",
+    "aliases": [
+      "background jobs",
+      "job queue",
+      "job queues",
+      "queues",
+      "bullmq",
+      "sidekiq",
+      "celery",
+      "durable workflows",
+      "workflow orchestration",
+      "sqs"
+    ]
+  },
+  {
+    "key": "aws",
+    "display": "AWS",
+    "category": "infra",
+    "aliases": ["aws", "amazon web services", "ec2", "s3", "lambda", "cloudformation"]
+  },
+  {
+    "key": "gcp",
+    "display": "GCP",
+    "category": "infra",
+    "aliases": ["gcp", "google cloud", "google cloud platform"]
+  },
+  {
+    "key": "azure",
+    "display": "Azure",
+    "category": "infra",
+    "aliases": ["azure", "microsoft azure"]
+  },
+  {
+    "key": "vercel",
+    "display": "Vercel",
+    "category": "infra",
+    "aliases": ["vercel"]
+  },
+  {
+    "key": "docker",
+    "display": "Docker",
+    "category": "infra",
+    "aliases": ["docker", "containers", "containerization"]
+  },
+  {
+    "key": "kubernetes",
+    "display": "Kubernetes",
+    "category": "infra",
+    "aliases": ["kubernetes", "k8s", "helm"]
+  },
+  {
+    "key": "terraform",
+    "display": "Terraform",
+    "category": "infra",
+    "aliases": ["terraform", "infrastructure as code", "pulumi"]
+  },
+  {
+    "key": "ci_cd",
+    "display": "CI/CD",
+    "category": "infra",
+    "aliases": ["ci/cd", "cicd", "continuous integration", "github actions", "jenkins", "circleci"]
+  },
+  {
+    "key": "observability",
+    "display": "Observability",
+    "category": "infra",
+    "aliases": ["observability", "monitoring", "datadog", "sentry", "grafana", "prometheus", "opentelemetry"]
+  },
+  {
+    "key": "linux",
+    "display": "Linux",
+    "category": "infra",
+    "aliases": ["linux", "unix", "bash", "shell scripting"]
+  },
+  {
+    "key": "security",
+    "display": "Application security",
+    "category": "security",
+    "aliases": [
+      "application security",
+      "appsec",
+      "owasp",
+      "penetration testing",
+      "cybersecurity",
+      "security engineering"
+    ]
+  },
+  {
+    "key": "auth",
+    "display": "Auth / identity",
+    "category": "security",
+    "aliases": ["oauth", "authentication", "authorization", "sso", "saml", "rbac"]
+  },
+  {
+    "key": "testing",
+    "display": "Automated testing",
+    "category": "backend",
+    "aliases": [
+      "unit testing",
+      "integration testing",
+      "automated testing",
+      "jest",
+      "vitest",
+      "playwright",
+      "cypress",
+      "tdd",
+      "pytest"
+    ]
+  },
+  {
+    "key": "system_design",
+    "display": "System design",
+    "category": "backend",
+    "aliases": ["system design", "distributed systems", "scalability", "software architecture"]
+  },
+  {
+    "key": "performance",
+    "display": "Performance engineering",
+    "category": "backend",
+    "aliases": ["performance engineering", "performance optimization", "latency", "profiling"]
+  },
+  {
+    "key": "product_sense",
+    "display": "Product sense",
+    "category": "product",
+    "aliases": [
+      "product sense",
+      "product thinking",
+      "user research",
+      "customer discovery",
+      "product discovery"
+    ]
+  },
+  {
+    "key": "product_management",
+    "display": "Product management",
+    "category": "product",
+    "aliases": ["product management", "product manager", "roadmap", "roadmapping", "prd"]
+  },
+  {
+    "key": "analytics_instrumentation",
+    "display": "Product analytics",
+    "category": "product",
+    "aliases": ["posthog", "amplitude", "mixpanel", "segment", "product analytics"]
+  },
+  {
+    "key": "ux_design",
+    "display": "UX design",
+    "category": "design",
+    "aliases": ["ux", "ux design", "user experience", "interaction design", "wireframing", "prototyping"]
+  },
+  {
+    "key": "figma",
+    "display": "Figma",
+    "category": "design",
+    "aliases": ["figma", "sketch"]
+  },
+  {
+    "key": "design_systems",
+    "display": "Design systems",
+    "category": "design",
+    "aliases": ["design system", "design systems", "component library", "storybook"]
+  },
+  {
+    "key": "accessibility",
+    "display": "Accessibility",
+    "category": "design",
+    "aliases": ["accessibility", "a11y", "wcag"]
+  },
+  {
+    "key": "agile",
+    "display": "Agile delivery",
+    "category": "business",
+    "aliases": ["agile", "scrum", "kanban", "jira"]
+  },
+  {
+    "key": "project_management",
+    "display": "Project management",
+    "category": "business",
+    "aliases": ["project management", "pmp", "stakeholder management"]
+  },
+  {
+    "key": "leadership",
+    "display": "Engineering leadership",
+    "category": "business",
+    "aliases": ["team leadership", "people management", "mentoring", "mentorship", "engineering manager"]
+  },
+  {
+    "key": "sales",
+    "display": "Sales",
+    "category": "business",
+    "aliases": ["sales", "business development", "account management", "quota", "crm", "salesforce"]
+  },
+  {
+    "key": "marketing",
+    "display": "Marketing",
+    "category": "business",
+    "aliases": ["marketing", "seo", "content marketing", "growth marketing", "campaigns"]
+  },
+  {
+    "key": "finance",
+    "display": "Finance & accounting",
+    "category": "business",
+    "aliases": [
+      "accounting",
+      "finance",
+      "financial analysis",
+      "financial reporting",
+      "bookkeeping",
+      "quickbooks",
+      "gaap",
+      "budgeting"
+    ]
+  },
+  {
+    "key": "customer_support",
+    "display": "Customer support",
+    "category": "business",
+    "aliases": ["customer service", "customer support", "client relations", "customer success"]
+  },
+  {
+    "key": "operations",
+    "display": "Operations",
+    "category": "business",
+    "aliases": ["operations management", "supply chain", "logistics", "procurement", "inventory management"]
+  },
+  {
+    "key": "healthcare",
+    "display": "Healthcare domain",
+    "category": "business",
+    "aliases": ["healthcare", "clinical", "patient care", "hipaa", "ehr", "medical"]
+  },
+  {
+    "key": "hr",
+    "display": "HR & recruiting",
+    "category": "business",
+    "aliases": ["human resources", "recruiting", "talent acquisition", "payroll", "hris"]
+  },
+  {
+    "key": "fintech",
+    "display": "Fintech / payments",
+    "category": "business",
+    "aliases": ["payments", "fintech", "stripe", "banking", "ledger"]
+  },
+  {
+    "key": "communication",
+    "display": "Communication",
+    "category": "business",
+    "aliases": ["communication skills", "written communication", "presentation skills", "public speaking"]
+  },
+  {
+    "key": "sap",
+    "display": "SAP / ERP",
+    "category": "business",
+    "aliases": ["sap", "erp", "oracle ebs", "netsuite"]
+  },
+  {
+    "key": "networking",
+    "display": "Networking",
+    "category": "infra",
+    "aliases": ["networking", "tcp/ip", "cisco", "network administration", "firewalls"]
+  },
+  {
+    "key": "embedded",
+    "display": "Embedded systems",
+    "category": "backend",
+    "aliases": ["embedded", "firmware", "rtos", "microcontrollers"]
+  },
+  {
+    "key": "blockchain",
+    "display": "Blockchain",
+    "category": "backend",
+    "aliases": ["blockchain", "solidity", "web3", "smart contracts", "ethereum"]
+  },
+  {
+    "key": "websockets",
+    "display": "Realtime / WebSockets",
+    "category": "backend",
+    "aliases": ["websockets", "websocket", "realtime", "real-time", "socket.io"]
+  },
+  {
+    "key": "open_source",
+    "display": "Open source",
+    "category": "product",
+    "aliases": ["open source", "open-source", "oss maintainer"]
+  }
+]
